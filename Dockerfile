@@ -1,13 +1,13 @@
 ARG PYTHON_VERSION=3.11.9
 
-FROM python:${PYTHON_VERSION}-slim as base
+FROM python:${PYTHON_VERSION}-slim
 
-WORKDIR /app
+WORKDIR /grib_docker
+
+COPY requirements.txt .
 
 RUN pip install -r requirements.txt
 
 COPY . .
-
-EXPOSE 8000
 
 CMD python3 unpack_grib.py
