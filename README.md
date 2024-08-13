@@ -10,11 +10,11 @@ docker pull yuuurewa/grib_docker
 
 2. Запустить контейнер из образа: 
 ```
-docker run -v /path/to/directory:/grib_docker/grib_file yuuurewa/grib_docker
+docker run -v /path/to/directory:/grib_docker/grib_files yuuurewa/grib_docker
 ``` 
 или 
 ```
-docker run --rm -v /path/to/directory:/grib_docker/grib_file yuuurewa/grib_docker
+docker run --rm -v /path/to/directory:/grib_docker/grib_files yuuurewa/grib_docker
 ```
 
 где: 
