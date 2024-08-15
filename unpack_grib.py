@@ -15,10 +15,10 @@ def get_grib_files() -> list[str]:
 def unpack_grib_files(grib_files: list[str]) -> None:
     for grib_file in grib_files:
         print('Unpack file ' + grib_file + '\n')
-        with pygrib.open(os.path.join(PATH_TO_GRIB, grib_file)) as grbs:
-            for grb in grbs:
-                print(grb)
-            print(50 * '-')
+        grib_list = pygrib.open(os.path.join(PATH_TO_GRIB, grib_file)).read()
+        for grib_msg in grib_list:
+            print(grib_msg)
+        print(50 * '-')
 
 
 def main() -> None:
