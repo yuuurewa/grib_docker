@@ -10,4 +10,4 @@ RUN pip install -r requirements.txt
 
 COPY . .
 
-CMD python3 unpack_grib.py
+CMD ["python3","unpack_grib.py"] 
