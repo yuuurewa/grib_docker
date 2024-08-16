@@ -1,29 +1,25 @@
 import os
 import pygrib
+from typing import Iterator, Any
 
 PATH_TO_GRIB = os.path.join(os.path.dirname(__file__), 'grib_files')
 
 
-def get_grib_files() -> list[str]:
-    grib_files = []
-    for filename in os.listdir(PATH_TO_GRIB):
-        if filename.lower().endswith(('.grib', '.grib2')):
-            grib_files.append(filename)
-    return grib_files
+def get_grib_files() ->Iterator[str]:
+    return (f for f in os.listdir(PATH_TO_GRIB) if f.lower().endswith(('.grib', '.grib2')))
 
 
-def unpack_grib_files(grib_files: list[str]) -> None:
-    for grib_file in grib_files:
-        print('Unpack file ' + grib_file + '\n')
-        grib_list = pygrib.open(os.path.join(PATH_TO_GRIB, grib_file)).read()
-        for grib_msg in grib_list:
-            print(grib_msg)
-        print(50 * '-')
+def unpack_grib_files(grib_file: str) -> list[Any]:
+    print('Unpack file ' + grib_file + '\n')
+    grib_list = pygrib.open(os.path.join(PATH_TO_GRIB, grib_file)).read()
+    return grib_list
 
 
 def main() -> None:
-    grib_files = get_grib_files()
-    unpack_grib_files(grib_files)
+    for grib_file in get_grib_files():
+        for grib_msg in unpack_grib_files(grib_file):
+            print(grib_msg)
+        print(50 * '-')
 
 
 if __name__ == '__main__':
